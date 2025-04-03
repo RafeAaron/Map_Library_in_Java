@@ -437,8 +437,6 @@ public class ShapeFile  {
                     bytesInRecordContent[i] = fis.read();
                 }
 
-                
-
                 number += length * 2 + 4;
                 float progress = (float) ((((double)number) / (this.fileLength * 2)));
 
@@ -449,6 +447,12 @@ public class ShapeFile  {
 
                 this.addRecord(record);
                 this.numberOfRecords++;
+
+                if(record.shapeType == 5)
+                {
+                    Polygon myPolygon = record.createPolygon();
+                    myPolygon.toString();
+                }
 
             }
 

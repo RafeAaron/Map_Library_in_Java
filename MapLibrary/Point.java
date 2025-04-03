@@ -40,4 +40,9 @@ public class Point {
         return this.Y;
     }
 
+    public String toString()
+    {
+        return "X: " + this.X + " Y: " + this.Y;
+    }
+
 }

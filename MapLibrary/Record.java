@@ -26,11 +26,10 @@ public class Record {
     {
         boolean status = false;
 
-        this.shapeType = this.content[0];
-
-        System.out.println(this.content[0]);
-
-        System.out.println("Shape Type: " + this.shapeType);
+        this.shapeType = this.content[3];
+        this.shapeType = this.shapeType << 8 | this.content[2];
+        this.shapeType = this.shapeType << 8 | this.content[1];
+        this.shapeType = this.shapeType << 8 | this.content[0];
 
         if( this.shapeType == 1) System.out.println("Point");
 
