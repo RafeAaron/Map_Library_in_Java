@@ -13,15 +13,13 @@ public class Polygon{
 
     public Polygon(int[] data)
     {
-
-        System.out.println("Hey I'm a polygon"); 
         
         byte[] minXArray = new byte[8];
         byte[] minYArray = new byte[8];
         byte[] maxXArray = new byte[8];
         byte[] maxYArray = new byte[8];
         
-        for(int i = 0; i < 36; i++)
+        for(int i = 0; i < 32; i++)
         {
             if(i < 8)
             {
@@ -53,62 +51,108 @@ public class Polygon{
 
         this.polygonBoundingBox = new BoundingBox(minX, minY, maxX, maxY);
         
-        int numberOfPartsInPolygon = data[39];
-        numberOfPartsInPolygon = numberOfPartsInPolygon << 8 | data[38];
-        numberOfPartsInPolygon = numberOfPartsInPolygon << 8 | data[37];
-        numberOfPartsInPolygon = numberOfPartsInPolygon << 8 | data[36];
+        int numberOfPartsInPolygon = data[35];
+        numberOfPartsInPolygon = numberOfPartsInPolygon << 8 | data[34];
+        numberOfPartsInPolygon = numberOfPartsInPolygon << 8 | data[33];
+        numberOfPartsInPolygon = numberOfPartsInPolygon << 8 | data[32];
 
         this.numberOfParts = numberOfPartsInPolygon;
 
-        int numberOfPointsInPolygon = data[43];
-        numberOfPointsInPolygon = numberOfPointsInPolygon << 8 | data[42];
-        numberOfPointsInPolygon = numberOfPointsInPolygon << 8 | data[41];
-        numberOfPointsInPolygon = numberOfPointsInPolygon << 8 | data[40];
+        int numberOfPointsInPolygon = data[39];
+        numberOfPointsInPolygon = numberOfPointsInPolygon << 8 | data[38];
+        numberOfPointsInPolygon = numberOfPointsInPolygon << 8 | data[37];
+        numberOfPointsInPolygon = numberOfPointsInPolygon << 8 | data[36];
 
         this.numberOfPoints = numberOfPointsInPolygon;
-
+        
         this.parts = new int[this.numberOfParts];
 
-        for(int i = 1; i <= numberOfPartsInPolygon; i++)
+        for(int i = 0; i < numberOfPartsInPolygon; i++)
         {
-            int a = data[43 + (4 * i)];
-            a = a << 8 | data[43 + (4 * i) + 1];
-            a = a << 8 | data[43 + (4 * i) + 2];
-            a = a << 8 | data[43 + (4 * i) + 3];
+            int a = data[40 + (4 * i) + 3];
+            a = a << 8 | data[40 + (4 * i) + 2];
+            a = a << 8 | data[40 + (4 * i) + 1];
+            a = a << 8 | data[40 + (4 * i) + 0];
 
-            this.parts[i - 1] = a;
+            this.parts[i] = a;
+
         }
-
-        int partNumber = 0;
 
         this.polygons = new MultiPoint[this.numberOfParts];
 
-        int byteOffset = 44 + (4 * this.numberOfParts);
+        int byteOffset = 40 + (4 * this.numberOfParts);
 
-        MultiPoint pointMulti = null;
-
-        for(int i = 0; i < numberOfPointsInPolygon; i++)
+        for(int i = 0; i < numberOfPartsInPolygon; i++)
         {
+            MultiPoint pointMulti = new MultiPoint();
+            this.polygons[i] = pointMulti;
 
-            Point currentPoint;
+            if(numberOfPartsInPolygon == 1){
 
-            if(i == this.parts[partNumber])
-            {
-                pointMulti = new MultiPoint();
-                this.polygons[partNumber] = pointMulti;
-                partNumber++;
+                for(int a = 0; a < this.numberOfPoints;a++)
+                {
+                    int[] arrayOfBytes = new int[16];
+
+                    Point currentPoint;
+
+                    for(int b = 0; b < 16; b++)
+                    {
+                        arrayOfBytes[b] = data[byteOffset + (a * 16) + b];
+                    }
+
+                    currentPoint = new Point(arrayOfBytes);
+                    pointMulti.addPoint(currentPoint);
+                }
+
+            }else{
+
+                if(i == numberOfPartsInPolygon - 1)
+                {
+
+                    int numberOfPointsRemaining = this.numberOfPoints - this.parts[i];
+                    int startingpoint = this.parts[i];
+
+                    for(int c = 0; c < numberOfPointsRemaining; c++)
+                    {
+                        int[] arrayOfBytes = new int[16];
+                        Point currentPoint;
+
+                        for(int d = 0; d < 16; d++)
+                    {
+                        arrayOfBytes[d] = data[byteOffset + (startingpoint * 16) + d];
+                    }
+
+                    currentPoint = new Point(arrayOfBytes);
+                    pointMulti.addPoint(currentPoint);
+                    startingpoint++;
+
+                    }
+
+                }else{
+
+                    int numberOfPointsRemaining = this.parts[i + 1] - this.parts[i];
+                    int startingpoint = this.parts[i];
+
+                    for(int c = 0; c < numberOfPointsRemaining; c++)
+                    {
+
+                        int[] arrayOfBytes = new int[16];
+                        Point currentPoint;
+
+                        for(int d = 0; d < 16; d++)
+                        {
+                            arrayOfBytes[d] = data[byteOffset + (startingpoint * 16) + d];
+                        }
+
+                    currentPoint = new Point(arrayOfBytes);
+                    pointMulti.addPoint(currentPoint);
+                    startingpoint++;
+
+                    }
+
+                }
+
             }
-
-            int[] arrayOfBytes = new int[16];
-
-            for(int a = 0; a < 16; a++)
-            {
-                arrayOfBytes[a] = data[byteOffset + (i * 16) + a];
-            }
-
-            currentPoint = new Point(arrayOfBytes);
-            pointMulti.addPoint(currentPoint);
-
         }
     }
 
@@ -129,7 +173,7 @@ public class Polygon{
 
         for(int i = 0; i < this.polygons.length; i++)
         {
-            endString += this.polygons.toString() + "\n";
+            endString += this.polygons[i].toString() + "\n";
         }
 
         return endString;

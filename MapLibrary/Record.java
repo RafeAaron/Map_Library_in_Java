@@ -75,7 +75,7 @@ public class Record {
 
         int dataForPoint[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPoint[i] = this.content[i + 4];
         }
@@ -95,7 +95,8 @@ public class Record {
 
         int dataForPolygon[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPolygon[i] = this.content[i + 4];
         }
@@ -115,7 +116,7 @@ public class Record {
 
         int dataForPolyLine[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPolyLine[i] = this.content[i + 4];
         }
@@ -135,7 +136,7 @@ public class Record {
 
         int dataForMultiPoint[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForMultiPoint[i] = this.content[i + 4];
         }
@@ -156,7 +157,7 @@ public class Record {
 
         int dataForPointZ[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPointZ[i] = this.content[i + 4];
         }
@@ -176,7 +177,7 @@ public class Record {
 
         int dataForPolygonZ[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPolygonZ[i] = this.content[i + 4];
         }
@@ -196,7 +197,7 @@ public class Record {
 
         int dataForPolyLineZ[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPolyLineZ[i] = this.content[i + 4];
         }
@@ -216,7 +217,7 @@ public class Record {
 
         int dataForMultiPointZ[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForMultiPointZ[i] = this.content[i + 4];
         }
@@ -237,7 +238,7 @@ public class Record {
 
         int dataForPointM[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPointM[i] = this.content[i + 4];
         }
@@ -257,7 +258,7 @@ public class Record {
 
         int dataForPolygonM[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPolygonM[i] = this.content[i + 4];
         }
@@ -277,7 +278,7 @@ public class Record {
 
         int dataForPolyLineM[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForPolyLineM[i] = this.content[i + 4];
         }
@@ -297,7 +298,7 @@ public class Record {
 
         int dataForMultiPointM[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForMultiPointM[i] = this.content[i + 4];
         }
@@ -317,7 +318,7 @@ public class Record {
 
         int dataForMultiPatch[] = new int[this.lengthOfContent - 4];
 
-        for(int i = 4; i < this.lengthOfContent; i++)
+        for(int i = 0; i < this.lengthOfContent - 4; i++)
         {
             dataForMultiPatch[i] = this.content[i + 4];
         }

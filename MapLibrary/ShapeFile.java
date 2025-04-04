@@ -440,7 +440,7 @@ public class ShapeFile  {
                 number += length * 2 + 4;
                 float progress = (float) ((((double)number) / (this.fileLength * 2)));
 
-                Record record = new Record(bytesInRecordContent, recordID, length);
+                Record record = new Record(bytesInRecordContent, recordID, length * 2);
 
                 System.out.println("Current Location: " + number + " out of " + this.fileLength * 2);
                 System.out.printf("Progress: %.2f%%\n", progress * 100);
@@ -450,8 +450,7 @@ public class ShapeFile  {
 
                 if(record.shapeType == 5)
                 {
-                    Polygon myPolygon = record.createPolygon();
-                    myPolygon.toString();
+                    //record.createPolygon();
                 }
 
             }

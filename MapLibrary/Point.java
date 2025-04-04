@@ -20,7 +20,7 @@ public class Point {
 
         for(int i = 8; i < 16; i++)
         {
-            pointYBytes[i] = (byte)data[i];
+            pointYBytes[i - 8] = (byte)data[i];
         }
 
         ByteBuffer bufferForPointX = ByteBuffer.wrap(pointXBytes);

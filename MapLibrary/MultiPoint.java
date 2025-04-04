@@ -73,7 +73,8 @@ public class MultiPoint {
 
         for(int a = 0; a < this.points.length; a++)
         {
-            endResult += this.points.toString() + "\n";
+            if(a == this.numberOfPoints) break;
+            endResult += this.points[a].toString() + "\n";
         }
 
         return endResult;
